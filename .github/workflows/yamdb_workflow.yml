@@ -73,9 +73,7 @@ jobs:
     steps:
     - name: send message
       uses: appleboy/telegram-action@master
-      run: 
-        FILES_CHANGED=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: ${{ github.workflow }} успешно выполнен. Изм. файлы ${{ FILES_CHANGED }}!!!
+        message: ${{ github.workflow }} успешно выполнен. Изм. файлы $(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})!!!
