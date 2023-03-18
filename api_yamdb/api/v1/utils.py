@@ -1,9 +1,8 @@
-from django.core.mail import send_mail
-from django.contrib.auth.tokens import default_token_generator
-from django.shortcuts import get_object_or_404
-from django.contrib.auth import get_user_model
 from django.conf import settings
-
+from django.contrib.auth import get_user_model
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import send_mail
+from django.shortcuts import get_object_or_404
 
 User = get_user_model()
 
@@ -24,5 +23,4 @@ def create_confirmation_code(request):
     username = request.data.get("username")
     email = request.data.get("email")
     user = get_object_or_404(User, username=username, email=email)
-    confirmation_code = default_token_generator.make_token(user)
-    return confirmation_code
+    return default_token_generator.make_token(user)

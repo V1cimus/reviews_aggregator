@@ -1,40 +1,25 @@
+from api.v1.filters import TitleFilter
+from api.v1.mixins import ListCreateDestroyGeneric
+from api.v1.permissions import (IsAdmin, IsAdminOrReadOnly,
+                                IsAuthorOrModeratorOrAdminOrReadOnly)
+from api.v1.serializers import (AuthSignUpSerializer, CategorySerializer,
+                                CommentSerializer, GenreSerializer,
+                                GetTokenSerializer, ReadOnlyTitleSerializer,
+                                ReviewSerializer, TitleSerializer,
+                                UsersSerializer)
+from api.v1.utils import send_email_with_confirmation_code
 from django.contrib.auth import get_user_model
-from django.db.models import Avg
 from django.db import IntegrityError
+from django.db.models import Avg
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import status, viewsets, filters
-from rest_framework.decorators import action
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import (
-    AllowAny,
-    IsAuthenticated,
-    IsAuthenticatedOrReadOnly,
-)
+from rest_framework import filters, status, viewsets
+from rest_framework.decorators import action, api_view, permission_classes
+from rest_framework.permissions import (AllowAny, IsAuthenticated,
+                                        IsAuthenticatedOrReadOnly)
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import AccessToken
-
-from reviews.models import Category, Genre, Title, Review
-from api.v1.filters import TitleFilter
-from api.v1.permissions import (
-    IsAdmin,
-    IsAdminOrReadOnly,
-    IsAuthorOrModeratorOrAdminOrReadOnly,
-)
-from api.v1.serializers import (
-    AuthSignUpSerializer,
-    CategorySerializer,
-    CommentSerializer,
-    GenreSerializer,
-    GetTokenSerializer,
-    ReadOnlyTitleSerializer,
-    ReviewSerializer,
-    TitleSerializer,
-    UsersSerializer,
-)
-from api.v1.mixins import ListCreateDestroyGeneric
-from api.v1.utils import send_email_with_confirmation_code
-
+from reviews.models import Category, Genre, Review, Title
 
 User = get_user_model()
 

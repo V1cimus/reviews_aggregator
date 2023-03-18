@@ -1,8 +1,7 @@
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 
-
-# For Django verdion > 3.0
+# For Django version > 3.0
 # class UserRole(models.TextChoices):
 #    USER = "user", "Пользователь"
 #    MODERATOR = "moderator", "Модератор"
