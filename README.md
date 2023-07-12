@@ -1,4 +1,4 @@
-## Площадка с пользовательской оценкой различных произведений из различных областей!
+## Площадка с пользовательской оценкой произведений из различных областей!
 
 ![example workflow](https://github.com/V1cimus/reviews_aggregator/actions/workflows/yamdb_workflow.yml/badge.svg)
 
